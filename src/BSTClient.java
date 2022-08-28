@@ -7,7 +7,7 @@ public class BSTClient {
         System.out.println(bst.Max());
         bst.add(27);
         bst.display();
-
+        bst.remove(30);
     }
 
 }

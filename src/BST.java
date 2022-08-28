@@ -94,26 +94,77 @@ public class BST {
     public  void add(int item){
         this.add(root, item);
     }
-    private void add(Node node, int item){
-        if(item<node.data){
-            if(node.left== null){
-                Node nn= new Node();
-                nn.data= item;
-            }else{
+    private void add(Node node, int item) {
+        if (item < node.data) {
+            if (node.left == null) {
+                Node nn = new Node();
+                nn.data = item;
+            } else {
                 add(node.left, item);
             }
-        }
-      else {
-            if(node.right== null){
-                Node nn= new Node();
-                nn.data= item;
-            }else{
+        } else {
+            if (node.right == null) {
+                Node nn = new Node();
+                nn.data = item;
+            } else {
                 add(node.right, item);
             }
         }
-
+    }
       //remove
 
-       // return add(node.left
+        public void remove(int item ) {
+          remove(this.root, null, false, item);
+        }
+
+
+
+    private void remove(Node node, Node parent, boolean ilc, int item) {
+        if(node==null){
+            return;
+        }
+
+        if(item> node.data){
+            remove(node.right,node, false, item);
+        }else  if (item< node.data){
+            remove(node.left, node, true, item);
+        }
+        else {
+            if(node.left==null&&node.right==null){
+                if(ilc){
+                  parent.left=null;
+                }else{
+                    parent.right=null;
+                }
+
+            }
+            else if (node.left==null && node.right != null) {
+                if(ilc){
+                    parent.left= node.right;
+                    //as there is element in the right
+                }else {
+                    parent.right= node.right;
+                }
+
+            }
+            else if (node.left!=null && node.right == null) {
+                if(ilc){
+                    parent.left= node.left;
+                }else{
+                    parent.right=node.left;
+                }
+            }
+            //this is critical case, where we have to take cosideration of left max or right min to replace node
+            //n.l!=null && n.r!= null
+            else{
+                //we will consider left max
+                int Max=Max(node.left);
+                node.data= Max;
+                remove(node.left,node, true, Max);
+            }
+
+
+        }
+
     }
 }
