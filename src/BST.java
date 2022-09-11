@@ -1,6 +1,4 @@
 public class BST {
-
-
     private class Node {
         int data;
         Node left;
@@ -162,9 +160,23 @@ public class BST {
                 node.data= Max;
                 remove(node.left,node, true, Max);
             }
-
-
         }
 
+    }
+    public boolean isBST(){
+        return this.isBST(this.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+    }
+    private boolean isBST(Node node, int min, int max ){
+        if(node== null )return true;
+     if(node.data > max|| node.data <min) return false;
+
+     else if(! this.isBST(node.left, Integer.MIN_VALUE , node.data )){
+         return  false;
+     }
+     else if(! this.isBST(node.right,node.data, Integer.MAX_VALUE)){
+        return false;
+     }
+     return true;
     }
 }

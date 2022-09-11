@@ -3,6 +3,8 @@ import com.sun.source.tree.IfTree;
 import java.util.Scanner;
 
 public class BinaryTrees {
+
+
     private class Node {
         int data;
         Node left;
